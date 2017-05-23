@@ -6,6 +6,13 @@
 - Typed lambda calculus
 - Lisp, ML, Miranda, ...
 
+### Haskell features
+ - Purely functional -> No side effect for functions, no `for/while` loop, referencial transparency
+ - Immutable variables by default
+ - Strongly typed with type inference
+ - Lazy (non-strict) -> results are evaluated only if they are required
+ - Layout based syntax (like Python, unlike C/C++)
+
 ### Is it more compiley or interprety?
  
 Haskell is a compiled language.
