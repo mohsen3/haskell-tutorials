@@ -1,7 +1,9 @@
 # Introduction
 
 ### A bit of history
-- Turing machine vs. lambda calculus
+- Turing machine vs. lambda calculus ([good read](https://cstheory.stackexchange.com/questions/625/relationship-between-turing-machine-and-lambda-calculus/715))
+  - Lambda calculus (1928-1929), Turing machine (1935-1937)
+  - Alan Turing was Alonzo Church's Ph.D. student at Princeton
 - Imperative languages vs. functional languages
 - Typed lambda calculus
 - Lisp, ML, Miranda, ...
