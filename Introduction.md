@@ -55,23 +55,32 @@ GHC toolset contains the following tools:
  - `hpc`: code coverage
  - `haddock`: document generator from source code
  
- ### Stack
+### Stack
  
- `stack` is a build tool and more for Haskell.
- It allows you to build your projects,
- install the required packages,
- and even setup the required tools for you.
- The easiest way to install GHC is to use `stack` to do so.
- First install `stack` for your platform
- (See [this link](https://docs.haskellstack.org/en/stable/install_and_upgrade/) for the instructions).
- Typically, you can download `stack` as a single pre-compiled statically-linked binary and put it in your `$PATH`.
- Once stack is installed, run `stack setup` to download and install GHC and a set of basic libraries.
- Be patient!
- It may take a long time (more than half an hour, if I remember correctly),
- but eventually it installs everything you need to start with programming Haskell.
- `stack` installs a sandbox copy of GHC and libraries inside your home folder,
- by default.
- To run `ghci`, you need to execute `stack ghci` then.
+`stack` is a build tool and more for Haskell.
+It allows you to build your projects,
+install the required packages,
+and even setup the required tools for you.
+The easiest way to install GHC is to use `stack` to do so.
+First install `stack` for your platform
+(See [this link](https://docs.haskellstack.org/en/stable/install_and_upgrade/) for the instructions).
+Typically, you can download `stack` as a single pre-compiled statically-linked binary and put it in your `$PATH`.
+Once stack is installed, run `stack setup` to download and install GHC and a set of basic libraries.
+Be patient!
+It may take a long time (more than half an hour, if I remember correctly),
+but eventually it installs everything you need to start with programming Haskell.
+`stack` installs a sandbox copy of GHC and libraries inside your home folder,
+by default.
+To run `ghci`, you need to execute `stack ghci` then.
+
+
+# Resources
  
- 
- 
+### Books
+ - [Haskell Programming from the First Principles](http://haskellbook.com/)
+ - [Learn You a Haskell for Great Good](http://learnyouahaskell.com/)
+
+### Papers and Tutorials
+ - [Haskell Wiki -- Intro](https://wiki.haskell.org/Introduction)
+ - [Haskell Fast & Hard](https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/haskell-fast-hard)
+ - [Why Functional Programming Matters](https://www.cs.kent.ac.uk/people/staff/dat/miranda/whyfp90.pdf)
