@@ -48,6 +48,10 @@ f x = x + 1
 g x y z = x + y + z
 ```
 
+- function/variable names always start with lower case letters
+- `myAwsomeFuntion`, `another_function`, and `foo'` are valid function names.
+  - yes, `'` is a valid function character!
+
 ### `let/in` keywords
 
 ```haskell
