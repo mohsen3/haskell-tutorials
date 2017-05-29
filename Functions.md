@@ -111,7 +111,27 @@ add x y = x + y
 three = 1 `add` 2
 ```
 
+### Passing functions to other functions
+
+```haskell
+f g x = g (g (g x))
+```
+
+### Returning functions from functions
+
+```haskell
+f flag = if flag then (+) else (-)
+```
+
+
+
 ### Currying
+
+All the functions take exactly one argument!
+`f x y z` can be seen as `((f x) y) z`,
+i.e,
+`f x` returns a functions that takes `y` and returns a function that takes `z`.
+
 
 ```haskell
 f :: Int -> Int -> Int
