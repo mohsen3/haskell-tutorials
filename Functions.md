@@ -66,6 +66,12 @@ g x =
        x1 + x2
 ```
 
+`let/in` can be used in any expression or sub-expression.
+```haskell
+3 ^ (let x = 10 in x + 1) * (let x = 3 in x * x)
+```
+Note the scope of the variable `x`.
+
 ### `where` keyword
 
 ```haskell
@@ -85,6 +91,51 @@ f x = x + 1
 f :: Float -> Float
 f x = x + 1
 ```
+
+### Pattern matching
+
+In function parameters:
+
+```haskell
+fib 0 = 1
+fib 1 = 1
+fib n = fib (n - 1) + fib (n - 2)
+```
+
+```haskell
+first  (x, y) = x
+second (x, y) = y
+```
+
+```haskell
+first  (x, _) = x
+second (_, y) = y
+```
+
+```haskell
+say 1 = "one"
+say 2 = "two"
+say 3 = "three"
+say 0 = "what?!"
+say _ = "many"
+```
+
+And in assignments:
+
+```haskell
+(first, second, third) = (1, 2, 3)
+```
+
+### Guards
+
+```haskell
+fib n
+   | n <= 1 = 1
+   | otherwise = fib (n - 1) + fib (n - 2)
+```
+
+
+### Guards
 
 ### Declaring new operators
 
@@ -123,7 +174,17 @@ f g x = g (g (g x))
 f flag = if flag then (+) else (-)
 ```
 
+## :ledger: Exercise
 
+Complete the body of the function `rep` so that the returned value is the result
+of repeatedly applying function `f` to `x`, `n` times.
+
+```haskell
+rep :: Int -> (Int -> Int) -> Int -> Int
+rep n f x = ...
+```
+
+E.g., `rep 3 f 1` is `f (f (f 1)))`.
 
 ### Currying
 
