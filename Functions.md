@@ -134,9 +134,6 @@ fib n
    | otherwise = fib (n - 1) + fib (n - 2)
 ```
 
-
-### Guards
-
 ### Declaring new operators
 
 ```haskell
@@ -204,5 +201,28 @@ f x y = x + y
 f 1 :: Int -> Int
 ```
 
+### Function composition
 
+Do you remember the [f∘g](https://www.wikiwand.com/en/Function_composition) notation from high school?
+
+```haskell
+import Data.List (sort)
+
+revSort = reverse . sort
+```
+
+
+```haskell
+myOdd = not . even
+```
+
+```haskell
+add a b = a + b
+square x = x * x
+plusOneSquared = squared . add 1
+```
+
+```haskell
+plusOneSquared = (^2) . (1+)
+```
 
