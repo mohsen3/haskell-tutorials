@@ -31,7 +31,7 @@ def f(g, n):
 ```
 
 ### Expressions
-Everything in Haskell is either an expression or decration.
+Everything in Haskell is either an expression or declaration.
 Expressions consist of
 - Literals, e.g, `123`, `"ABC"`, ...
 - Variables
@@ -48,8 +48,8 @@ f x = x + 1
 g x y z = x + y + z
 ```
 
-- function/variable names always start with lower case letters
-- `myAwsomeFuntion`, `another_function`, and `foo'` are valid function names.
+- function/variable names always start with lowercase letters
+- `myAwesomeFuntion`, `another_function`, and `foo'` are valid function names.
   - yes, `'` is a valid function character!
 
 ### `let/in` keywords
