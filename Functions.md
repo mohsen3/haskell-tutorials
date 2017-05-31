@@ -92,6 +92,11 @@ f :: Float -> Float
 f x = x + 1
 ```
 
+```haskell
+add :: Int -> Int -> Int
+add a b = a + b
+```
+
 ### Pattern matching
 
 In function parameters:
