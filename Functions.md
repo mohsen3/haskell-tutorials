@@ -171,11 +171,21 @@ three = 1 `add` 2
 f g x = g (g (g x))
 ```
 
+### :ledger: Exercise
+
+What is the type of function `f`?
+
+
 ### Returning functions from functions
 
 ```haskell
 f flag = if flag then (+) else (-)
 ```
+
+### :ledger: Exercise
+
+What is the type of function `f`?
+
 
 ## :ledger: Exercise
 
