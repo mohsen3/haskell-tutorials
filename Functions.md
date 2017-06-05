@@ -242,3 +242,65 @@ plusOneSquared = squared . add 1
 plusOneSquared = (^2) . (1+)
 ```
 
+### Fixity of operators
+
+Each operator in Haskell has a precedence in the range `0..9`
+and an associativity (which can be right, left, or none).
+
+Here is a GHCi session.
+`λ>` denotes the command entered.
+The rest is the output.
+
+```haskell
+λ> :info (+)
+class Num a where
+  (+) :: a -> a -> a
+  ...
+        -- Defined in `GHC.Num'
+infixl 6 +
+
+λ> :info (*)
+class Num a where
+  ...
+  (*) :: a -> a -> a
+  ...
+        -- Defined in `GHC.Num'
+infixl 7 *
+
+λ> :info (^)
+(^) :: (Num a, Integral b) => a -> b -> a       -- Defined in `GHC.Real'
+infixr 8 ^
+
+λ> :info (**)
+class Fractional a => Floating a where
+  ...
+  (**) :: a -> a -> a
+  ...
+        -- Defined in `GHC.Float'
+infixr 8 **
+
+λ> :info mod
+class (Real a, Enum a) => Integral a where
+  ...
+  mod :: a -> a -> a
+  ...
+        -- Defined in `GHC.Real'
+infixl 7 `mod`
+```
+
+We can define the fixity of operators when we define them.
+```haskell
+x *** y = (x + 1) * y
+infixl 7 ***
+```
+
+Functions have the highest precedence (10),
+i.e.,
+when mixed with operators,
+function calls will be first.
+E.g.,
+`abs x + y` is the same as `(abs x) + y`.
+
+
+
+
