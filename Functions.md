@@ -302,5 +302,17 @@ E.g.,
 `abs x + y` is the same as `(abs x) + y`.
 
 
+### The `$` operator
 
+```haskell
+f $ a = f a
+infixr 0 $
+```
+
+```haskell
+λ> (2^) $ 2 + 2
+16
+
+λ> print $ 1 + 2
+```
 
