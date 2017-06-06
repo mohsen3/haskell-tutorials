@@ -314,5 +314,9 @@ infixr 0 $
 16
 
 λ> print $ 1 + 2
+3
+
+λ> print $ abs $ 1 - 2
+1
 ```
 
