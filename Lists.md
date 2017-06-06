@@ -105,6 +105,21 @@ zipWith _ _ []          = []
 
 `zip` can be implemented usign `zipWith`: `zip = zipWith (,)`.
 
+### :ledger: Exercise
+
+Implement the following functions:
+
+- `null :: [a] -> Bool` return `True` if the given list is empty, `False` otherwise
+- `elem :: a -> [a] -> Bool` return `True` if the given element is in list, `False` otherwise
+  - Suggest an alternative implementation for `elem`
+- `sum :: [Int] -> Int` summation of the elements of a list of integers
+- `filter :: (a -> Bool) -> [a] -> [a]` keep the elements that match the criterion, drop the rest
+- `splitAt :: Int -> [a] -> ([a], [a])` split the list into two smaller lists at the given index
+  - Hint: use `take` and `drop`
+- `all :: (a -> Bool) -> [a] -> Bool` return `True` if all the elements of the list match the given criterion, `False` otherwise
+  - Hint: use `map` and `and`
+
+
 
 ## Infinite lists
 
