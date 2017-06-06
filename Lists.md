@@ -1,5 +1,5 @@
 
-## Lists
+## Introduction
 
 The following snippet is stolen from [here](http://yannesposito.com/Scratch/en/blog/Haskell-the-Hard-Way/#lists).
 
@@ -25,7 +25,11 @@ The following snippet is stolen from [here](http://yannesposito.com/Scratch/en/b
 - To append two lists, use the `++` operator
 - To append a single element `a` to list `l`, use `l ++ [a]`
 
-### Pattern matching on lists
+
+![lists in haskell are linked lists](http://s3.amazonaws.com/lyah/listmonster.png)
+
+
+## Pattern matching on lists
 
 ```haskell
 head :: [a] -> a
@@ -45,8 +49,64 @@ threeIsOk [_, _, _] = True
 threeIsOn _ = False
 ```
 
+## List functions
 
-### Infinite lists
+```haskell
+import Prelude hiding (length, last, reverse, take, drop, concat, map, and, zip, zipWith)
+
+length []    = 0
+length (_:r) = 1 + length r
+
+
+last [x]   = x
+last (_:r) = last r
+
+
+reverse []    = []
+reverse (h:r) = reverse r ++ [h]
+
+
+take :: Int -> [a] -> [a]
+take n (h:r)
+   | n <= 0    = []
+   | otherwise = h : take (n - 1) r
+
+
+drop _ []    = []
+drop n (h:r) = if n <= 0 then h:r else drop (n - 1) r
+
+
+concat :: [[a]] -> [a]
+concat []    = []
+concat (h:r) = h ++ concat r
+
+
+map :: (a -> b) -> [a] -> [b]
+map _ []    = []
+map f (h:r) = f h : map f r
+
+
+and :: [Bool] -> Bool
+and []    = True
+and (h:r) = h && and r
+
+
+zip :: [a] -> [b] -> [(a, b)]
+zip [] _          = []
+zip _  []         = []
+zip (x:r1) (y:r2) = (x, y):zip r1 r2
+
+
+zipWith :: (a -> b -> c) -> [a] -> [b] -> [c]
+zipWith _ [] _          = []
+zipWith _ _ []          = []
+
+```
+
+`zip` can be implemented usign `zipWith`: `zip = zipWith (,)`.
+
+
+## Infinite lists
 
 ```haskell
 ones = 1 : ones
