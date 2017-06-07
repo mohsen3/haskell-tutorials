@@ -146,3 +146,12 @@ Fibonacci series
 fibs = 1:1:zipWith (+) (tail fibs) fibs
 ```
 
+### :ledger: Homework
+
+Can you solve [Project Euler](https://projecteuler.net)'s problems
+[1](https://projecteuler.net/problem=1) and
+[2](https://projecteuler.net/problem=2)?
+
+- Hints: use `filter` and `sum` from `Prelude` for problem 1 and 
+  `fibs` (defined above) together with `filter`, `even`, and `sum` for problem 2.
+
