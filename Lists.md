@@ -109,23 +109,23 @@ zipWith _ _ []          = []
 
 Implement the following functions:
 
-- `null :: [a] -> Bool` return `True` if the given list is empty, `False` otherwise
+1. `null :: [a] -> Bool` return `True` if the given list is empty, `False` otherwise
 
-- `elem :: a -> [a] -> Bool` return `True` if the given element is in list, `False` otherwise
-  - Suggest an alternative implementation for `elem`
+2. `elem :: a -> [a] -> Bool` return `True` if the given element is in list, `False` otherwise
+    * Suggest an alternative implementation for `elem`
 
-- `sum :: [Int] -> Int` summation of the elements of a list of integers
+3. `sum :: [Int] -> Int` summation of the elements of a list of integers
 
-- `filter :: (a -> Bool) -> [a] -> [a]` keep the elements that match the criterion, drop the rest
+4. `filter :: (a -> Bool) -> [a] -> [a]` keep the elements that match the criterion, drop the rest
 
-- `splitAt :: Int -> [a] -> ([a], [a])` split the list into two smaller lists at the given index
-  - Hint: use `take` and `drop`
+5. `splitAt :: Int -> [a] -> ([a], [a])` split the list into two smaller lists at the given index
+    * Hint: use `take` and `drop`
 
-- `all :: (a -> Bool) -> [a] -> Bool` return `True` if all the elements of the list match the given criterion, `False` otherwise
-  - Hint: use `map` and `and`
+6. `all :: (a -> Bool) -> [a] -> Bool` return `True` if all the elements of the list match the given criterion, `False` otherwise
+    * Hint: use `map` and `and`
 
-- `takeWhile :: (a -> Bool) -> [a] -> [a]` takes from the list while the criterion is `True`
-  - example: `takeWhile (<5) [1, 1, 4, 3, 5, 6, 1, 10]` returns `[1, 1, 4, 3]`
+7. `takeWhile :: (a -> Bool) -> [a] -> [a]` takes from the list while the criterion is `True`
+    * example: `takeWhile (<5) [1, 1, 4, 3, 5, 6, 1, 10]` returns `[1, 1, 4, 3]`
 
 ## Infinite lists
 
