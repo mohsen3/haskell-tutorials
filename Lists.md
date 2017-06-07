@@ -126,6 +126,7 @@ Implement the following functions:
 ```haskell
 ones = 1 : ones
 zeros = 0 : zeros
+numsFrom n = n : numsFrom (n + 1)
 ```
 
 ```haskell
