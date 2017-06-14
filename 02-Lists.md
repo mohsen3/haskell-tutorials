@@ -127,6 +127,37 @@ Implement the following functions:
 7. `takeWhile :: (a -> Bool) -> [a] -> [a]` takes from the list while the criterion is `True`
     * example: `takeWhile (<5) [1, 1, 4, 3, 5, 6, 1, 10]` returns `[1, 1, 4, 3]`
 
+
+## List comprehension
+
+### Simple
+```haskell
+squares = [ x * x | x <- [1..5] ] -- [1,4,9,16,25]
+```
+
+### With two iterators
+```haskell
+[ (i, j) | i <- [1, 3], j <- [4..7] ] -- [(1,4),(1,5),(1,6),(1,7),(3,4),(3,5),(3,6),(3,7)]
+```
+
+### With filters
+```haskell
+[ x * x | x <- [1..5], odd x ] -- [1,9,25]
+```
+
+### With pattern matching
+
+```haskell
+lst = [(1, True), (2, False), (4, True)]
+filtered = [n | (n, True) <- lst] -- [1,4]
+```
+
+### With filter and multiple iterators
+```haskell
+[ (i, j) | i <- [1..5], odd i, j <- [1..i] ] -- [(1,1),(3,1),(3,2),(3,3),(5,1),(5,2),(5,3),(5,4),(5,5)]
+```
+
+
 ## Infinite lists
 
 ```haskell
