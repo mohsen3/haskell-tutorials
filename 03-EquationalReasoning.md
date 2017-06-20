@@ -53,3 +53,14 @@ f = g . h where g = (++)
 f = (++) . uncurry (:)
 ```
 
+## `QuickCheck`ing
+
+```haskell
+import Test.QuickCheck
+
+prop :: (Int, [Int]) -> [Int] -> Bool
+prop x y = f x y == g x y
+    where
+        f (c, w1) w2 = c:w1 ++ w2
+        g = (++) . uncurry (:)
+```
