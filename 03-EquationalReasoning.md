@@ -25,3 +25,31 @@ add x y = (+) x y
 add = (+)
 ```
 
+## Point free style of functions
+
+```haskell
+f :: (a, [a]) -> [a] -> [a]
+f (c, w1) w2 = c:w1 ++ w2
+
+-- Prefix style of ++
+f (c, w1) w2 = (++) (c:w1) w2
+
+-- Eta reduction
+f (c, w1) = (++) (c:w1)
+
+-- Prefix style of :
+f (c, w1) = (++) ((:) c w1)
+
+-- Use uncurry
+f x = (++) (uncurry (:) x)
+
+-- f x = g (h x) where g = (++); h = uncurry (:)
+-- Composition
+f = g . h where g = (++)
+                h = uncurry (:)
+                
+
+-- Plug back g and h
+f = (++) . uncurry (:)
+```
+
