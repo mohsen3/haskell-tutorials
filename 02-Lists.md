@@ -208,3 +208,5 @@ Can you solve [Project Euler](https://projecteuler.net)'s problems
 - Hints: use `filter` and `sum` from `Prelude` for problem 1 and 
   `fibs` (defined above) together with `filter`, `even`, and `sum` for problem 2.
 
+### Further reading
+http://learnyouahaskell.com/higher-order-functions
