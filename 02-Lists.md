@@ -177,6 +177,28 @@ Fibonacci series
 fibs = 1:1:zipWith (+) (tail fibs) fibs
 ```
 
+
+### Folding lists
+
+```python
+list = range(1, 100)
+sum = 0
+for e in list:
+   sum = sum + e
+```
+
+```haskell
+foldr f z []     = z
+foldr f z (x:xs) = x `f` foldr f z xs
+```
+
+```haskell
+foldl f z []     = z
+foldl f z (x:xs) = let z' = z `f` x 
+                   in foldl f z' xs
+```
+
+
 ### :ledger: Homework
 
 Can you solve [Project Euler](https://projecteuler.net)'s problems
