@@ -18,7 +18,13 @@ data Person = Person String Int String
 
 data Tree = Internal Tree Int Tree | Leaf Int
 
-data LinkedList = Const Int LinkedList | Nil
+data LinkedList = Cons Int LinkedList | Nil
+
+data Shape = Circle Double |
+             Rectangle Double Double |
+             Square Double |
+             Triangle Double Double
+
 ```
 
 Data types can be parameterized
@@ -27,4 +33,31 @@ Data types can be parameterized
 data Tree a = Internal (Tree a) a (Tree a) | Leaf a
 
 data LinkedList a = Cons a (LinkedList a) | Nil
+```
+
+## Pattern matching on ADTs
+
+```haskell
+sum' :: LinkedList ->  Int
+sum' (Cons i r) = i + sum' r
+sum' Nil = 0
+```
+
+```haskell
+area :: Shape -> Double
+area (Circle r) = 3.14 * r * r
+area (Rectangle a b) = a * b
+area (Square a) = a * a
+area (Triangle h r) = 0.5 * r * h
+```
+
+## Record syntax
+
+```haskell
+data Person = Person{ name :: String, age :: Int, address :: String }
+
+p = Person "Mike" 10 "Vancouver, Candada" -- you can still use the positional syntax
+p2 = p{ age = 11 } -- record update
+mike'sAge = age p2 -- age is a function of Person -> Int
+
 ```
