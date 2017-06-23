@@ -22,7 +22,7 @@ data LinkedList = Cons Int LinkedList | Nil
 
 data Colour = Black | Red | Green | Blue | Cyan | Yellow | Magenta | White | 
               RGB Int Int Int |
-              RGBA Int Int Int
+              RGBA Int Int Int Int
 
 data Shape = Circle Double |
              Rectangle Double Double |
