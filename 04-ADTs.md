@@ -54,6 +54,10 @@ area (Triangle h r) = 0.5 * r * h
 ## Record syntax
 
 ```haskell
+data Tree = Internal{ left :: Tree, data_ :: Int, right :: Tree } | Leaf { data_ :: Int }
+```
+
+```haskell
 data Person = Person{ name :: String, age :: Int, address :: String }
 
 p = Person "Mike" 10 "Vancouver, Candada" -- you can still use the positional syntax
