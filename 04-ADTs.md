@@ -31,6 +31,17 @@ data Shape = Circle Double |
 
 ```
 
+Constructors are similar to functions
+
+```haskell
+λ> data LinkedList = Cons Int LinkedList | Nil
+λ> :t Cons
+Cons :: Int -> LinkedList -> LinkedList
+λ> :t Nil
+Nil :: LinkedList
+```
+
+
 Data types can be parameterized
 
 ```haskell
