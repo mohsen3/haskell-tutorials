@@ -22,7 +22,8 @@ data LinkedList = Cons Int LinkedList | Nil
 
 data Colour = Black | Red | Green | Blue | Cyan | Yellow | Magenta | White | 
               RGB Int Int Int |
-              RGBA Int Int Int Int
+              RGBA Int Int Int Int |
+              CMYK Int Int Int Int
 
 data Shape = Circle Double |
              Rectangle Double Double |
@@ -79,4 +80,10 @@ p = Person "Mike" 10 "Vancouver, Candada" -- you can still use the positional sy
 p2 = p{ age = 11 } -- record update
 mike'sAge = age p2 -- age is a function of Person -> Int
 
+```
+
+## The `deriving` keyword
+
+```haskell
+data DayOfWeek =  Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday deriving (Eq, Ord, Show, Read, Enum, Bounded)
 ```
