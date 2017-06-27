@@ -67,6 +67,20 @@ area (Square a) = a * a
 area (Triangle h r) = 0.5 * r * h
 ```
 
+## `Maybe` and `Either`
+
+```haskell
+data Maybe a = Nothing | Just a
+
+safeHead :: [a] -> Maybe a
+safeHead []    = Nothing
+safeHead (x:_) = Just x
+```
+
+```haskell
+data Either a b = Left a | Right b
+```
+
 ## Record syntax
 
 ```haskell
@@ -85,7 +99,8 @@ mike'sAge = age p2 -- age is a function of Person -> Int
 ## The `deriving` keyword
 
 ```haskell
-data DayOfWeek =  Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday deriving (Eq, Ord, Show, Read, Enum, Bounded)
+data DayOfWeek =  Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday
+                      deriving (Eq, Ord, Show, Read, Enum, Bounded)
 ```
 
 ## Data constructors can be operators
@@ -96,4 +111,3 @@ infixr 1 :::
 
 list = 1 ::: 2 ::: 3 ::: Empty
 ```
-
