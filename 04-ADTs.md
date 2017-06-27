@@ -87,3 +87,13 @@ mike'sAge = age p2 -- age is a function of Person -> Int
 ```haskell
 data DayOfWeek =  Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday deriving (Eq, Ord, Show, Read, Enum, Bounded)
 ```
+
+## Data constructors can be operators
+
+```haskell
+data List a = Empty | a ::: List a deriving (Eq, Ord, Show, Read)
+infixr 1 :::
+
+list = 1 ::: 2 ::: 3 ::: Empty
+```
+
