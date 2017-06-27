@@ -79,6 +79,13 @@ safeHead (x:_) = Just x
 
 ```haskell
 data Either a b = Left a | Right b
+
+data Date = Date {year :: Int, month :: Int, day :: Int} deriving (Eq, Show)
+mkDate :: Int -> Int -> Int -> Either String Date
+mkDate y m d
+  | d > 31 || d < 1 = Left ("Incorrect day " ++ show d)
+  | m > 12 || m < 1 = Left ("Unknown month " ++ show m)
+  | otherwise       = Right $ Date y m d
 ```
 
 ## Record syntax
