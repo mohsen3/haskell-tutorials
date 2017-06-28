@@ -67,6 +67,15 @@ area (Square a) = a * a
 area (Triangle h r) = 0.5 * r * h
 ```
 
+## Constructors are functions
+
+```haskell
+data Imaginary = Im { img :: Int, real :: Int }
+numbers = zipWith Im [1, 2, 3] [5, 6, 7]
+fromReal = Im 0
+```
+
+
 ## `Maybe` and `Either`
 
 ```haskell
@@ -119,7 +128,7 @@ infixr 1 :::
 list = 1 ::: 2 ::: 3 ::: Empty
 ```
 
-### :ledger: Exercise
+### :ledger: Homework
 
 Consider the following definition of `Colour`:
 
