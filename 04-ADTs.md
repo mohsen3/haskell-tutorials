@@ -32,17 +32,6 @@ data Shape = Circle Double |
 
 ```
 
-Constructors are similar to functions
-
-```haskell
-λ> data LinkedList = Cons Int LinkedList | Nil
-λ> :t Cons
-Cons :: Int -> LinkedList -> LinkedList
-λ> :t Nil
-Nil :: LinkedList
-```
-
-
 Data types can be parameterized
 
 ```haskell
@@ -68,6 +57,15 @@ area (Triangle h r) = 0.5 * r * h
 ```
 
 ## Constructors are functions
+Constructors are similar to functions
+
+```haskell
+λ> data LinkedList = Cons Int LinkedList | Nil
+λ> :t Cons
+Cons :: Int -> LinkedList -> LinkedList
+λ> :t Nil
+Nil :: LinkedList
+```
 
 ```haskell
 data Imaginary = Im { img :: Int, real :: Int }
