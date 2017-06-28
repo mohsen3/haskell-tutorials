@@ -73,6 +73,28 @@ numbers = zipWith Im [1, 2, 3] [5, 6, 7]
 fromReal = Im 0
 ```
 
+## Record syntax
+
+```haskell
+data Tree = Internal{ left :: Tree, data_ :: Int, right :: Tree } | Leaf { data_ :: Int }
+```
+
+```haskell
+data Person = Person{ name :: String, age :: Int, address :: String }
+
+p = Person "Mike" 10 "Vancouver, Candada" -- you can still use the positional syntax
+p2 = p{ age = 11 } -- record update
+mike'sAge = age p2 -- age is a function of Person -> Int
+
+```
+
+## The `deriving` keyword
+
+```haskell
+data DayOfWeek =  Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday
+                      deriving (Eq, Ord, Show, Read, Enum, Bounded)
+```
+
 
 ## `Maybe` and `Either`
 
@@ -95,27 +117,6 @@ mkDate y m d
   | otherwise       = Right $ Date y m d
 ```
 
-## Record syntax
-
-```haskell
-data Tree = Internal{ left :: Tree, data_ :: Int, right :: Tree } | Leaf { data_ :: Int }
-```
-
-```haskell
-data Person = Person{ name :: String, age :: Int, address :: String }
-
-p = Person "Mike" 10 "Vancouver, Candada" -- you can still use the positional syntax
-p2 = p{ age = 11 } -- record update
-mike'sAge = age p2 -- age is a function of Person -> Int
-
-```
-
-## The `deriving` keyword
-
-```haskell
-data DayOfWeek =  Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday
-                      deriving (Eq, Ord, Show, Read, Enum, Bounded)
-```
 
 ## Data constructors can be operators
 
