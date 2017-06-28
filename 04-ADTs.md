@@ -23,7 +23,7 @@ data LinkedList = Cons Int LinkedList | Nil
 data Colour = Black | Red | Green | Blue | Cyan | Yellow | Magenta | White | 
               RGB Int Int Int |
               RGBA Int Int Int Int |
-              CMYK Int Int Int Int
+              CMYK Float Float Float Float
 
 data Shape = Circle Double |
              Rectangle Double Double |
@@ -118,3 +118,25 @@ infixr 1 :::
 
 list = 1 ::: 2 ::: 3 ::: Empty
 ```
+
+### :ledger: Exercise
+
+Consider the following definition of `Colour`:
+
+```haskell
+data Colour = White | Black | Red | Green | Blue |
+              RGB Int Int Int |
+              CMYK Float Float Float Float
+```
+
+Define the following functions
+
+  - `toRGB :: Colour -> (Int, Int, Int)` that converts a `Colour` object to a tuple of red, green, and blue colours.
+     Use the formula suggested in [this link](http://www.rapidtables.com/convert/color/cmyk-to-rgb.htm) for CMYK.
+  - `fromRGB :: (Int, Int, Int) -> Maybe Colour` that converts the given RGB tuple into a `Colour` object.
+    Return `Nothing` if the given numbers are outside range 0-255.
+  - `brighter :: Colour -> Colour` that makes RGB colours 10% larger.
+     None of the RGB components can be larger than 255.
+  - `toHexString :: Colour -> String` converts the colour object into a hex string, e.g., `toHexString White` is `"#FFFFFF"`.
+  - Advanced: `fromHexString :: String -> Either String Colour` converts a hex string into a `Colour` object.
+    Returns an appropriate error message if the input string is not well formatted.
