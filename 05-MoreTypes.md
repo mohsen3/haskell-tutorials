@@ -1,4 +1,20 @@
 
+## Return type polymorphism
+
+```haskell
+λ> n = 1
+λ> :type n
+n :: Num t => t
+
+λ> i = n :: Int
+λ> :type i
+i :: Int
+
+λ> d = n :: Double
+λ> :type d
+d :: Double
+```
+
 ## Typeclasses
 
 ```haskell
