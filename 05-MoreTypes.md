@@ -15,6 +15,16 @@ i :: Int
 d :: Double
 ```
 
+## Type aliases
+
+```haskell
+type Name = String
+type Age = Int
+
+data Person = Person { firstName :: Name, lastName :: Name, age :: Age }
+
+```
+
 ## Typeclasses
 
 ```haskell
