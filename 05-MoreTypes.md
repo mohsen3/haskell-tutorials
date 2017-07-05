@@ -25,6 +25,17 @@ data Person = Person { firstName :: Name, lastName :: Name, age :: Age }
 
 ```
 
+## `newtype` keyword
+
+Loosely speaking, `newtype` is like `data` with one constructor and one field.
+
+```haskell
+newtype Age = Age Int deriving (Eq, Ord, Show)
+
+isOld :: Age -> Bool
+isOld (Age age) = if age > 80 then True else False
+```
+
 ## Typeclasses
 
 ```haskell
