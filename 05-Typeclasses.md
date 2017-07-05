@@ -39,11 +39,49 @@ class Num a where
 ```haskell
 module Tutorials.Tree (Tree, empty, insert, contains) where
 
-data Tree a = Nil | Node (Tree a) a (Tree a) deriving (Eq, Ord)
+data Tree a = Nil | Node (Tree a) a (Tree a) deriving (Eq, Ord, Show, Read)
+
+empty = Nil
+
+insert x Nil = Node Nil x Nil
+insert x (Node left d right) =
+  if x > d
+    then Node left d (insert x right)
+    else Node (insert x left) d right
+
+contains x Nil = False
+contains x (Node l e r)
+  | x == e = True
+  | x < e = contains x l
+  | otherwise = contains x r
+
+```
+
+### Implementing the instances manually (not using `deriving`)
+```haskell
+module Tutorials.Tree (Tree, empty, insert, contains) where
+
+data Tree a = Nil | Node (Tree a) a (Tree a)
 
 instance Show a => Show (Tree a) where
   show Nil = ""
   show (Node l x r) = concat [ show x, "(", show l, ",", show r, ")"]
+
+instance Eq a => Eq (Tree a) where
+  Nil == Nil = True
+  Node r1 x l1 == Node r2 y l2 =
+    x  == y  &&
+    r1 == r2 && 
+    l1 == l2
+  _ == _ = False
+
+instance Ord a => Ord (Tree a) where
+  Nil <= _ = True
+  Node _ _ _ <= Nil = False
+  Node l1 x r1 <= Node l2 y r2 =
+    (l1 < l2) ||
+    (l1 == l2 && x < y) ||
+    (l1 == l2 && x == y && r1 <= r2)
 
 empty = Nil
 
