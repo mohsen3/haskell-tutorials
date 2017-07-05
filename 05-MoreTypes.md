@@ -15,7 +15,7 @@ i :: Int
 d :: Double
 ```
 
-## Type aliases
+## Type synonyms
 
 ```haskell
 type Name = String
@@ -41,7 +41,7 @@ isOld (Age age) = if age > 80 then True else False
 ```haskell
 class Serializable a where
   serialize :: a -> [Int]
-  deserialize :: [Int] -> Maybe a
+  deserialize :: [Int] -> (Maybe a, [Int]) -- if possible decode the object, return the remainder as well
 ```
 
 ```haskell
@@ -69,6 +69,31 @@ class Num a where
   negate x = 0 - x
 
   {-# MINIMAL (+), (*), abs, signum, fromInteger, (negate | (-)) #-}
+```
+
+## Instance declaration
+
+```haskell
+
+{-# LANGUAGE TypeSynonymInstances, FlexibleInstances #-}
+import Data.Char
+
+instance Serializable Int where
+  serialize n = [n]
+  
+  deserialize (n:r) = (Just n, r)
+  deserialize empty = (Nothing, empty)
+  
+  
+instance Serializable String where
+  serialize str = length str:map ord str
+  
+  deserialize [] = (Nothing, [])
+  deserialize (l:r) =
+    if length r >= l
+    then (Just $ map chr $ take l r, drop l r)
+    else (Nothing, r)
+
 ```
 
 ## A complete example
