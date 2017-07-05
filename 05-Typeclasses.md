@@ -1,4 +1,38 @@
 
+## Typeclasses
+
+```haskell
+class Serializable a where
+  serialize :: a -> [Int]
+  deserialize :: [Int] -> Maybe a
+```
+
+```haskell
+class Eq a where
+  (==) :: a -> a -> Bool
+  x == y = not (x /= y)
+  
+  (/=) :: a -> a -> Bool
+  x /= y = not (x == y)
+  
+  {-# MINIMAL (==) | (/=) #-}
+```
+
+```haskell
+class Num a where
+  (+) :: a -> a -> a
+  (-) :: a -> a -> a
+  (*) :: a -> a -> a
+  negate :: a -> a
+  abs :: a -> a
+  signum :: a -> a
+  fromInteger :: Integer -> a
+  
+  x - y = x + negate y
+  negate x = 0 - x
+
+  {-# MINIMAL (+), (*), abs, signum, fromInteger, (negate | (-)) #-}
+```
 
 ## A complete example
 
