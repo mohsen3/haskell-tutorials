@@ -163,3 +163,8 @@ instance Ord a => Ord (Tree a) where
     (l1 == l2 && x < y) ||
     (l1 == l2 && x == y && r1 <= r2)
 ```
+
+### Further reading
+
+* Automatic differentiation in Haskell
+  * http://www.danielbrice.net/blog/2015-12-01/
