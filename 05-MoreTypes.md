@@ -75,6 +75,26 @@ class Num a where
 
 ```haskell
 
+data Binary = Zero | One deriving (Eq, Show, Read, Ord, Enum, Bounded)
+
+instance Num Binary where
+    Zero + x = x
+    One  + x = One
+
+    Zero * x = Zero
+    One  * x = x
+
+    negate = id
+    abs = id
+    signum = id
+    
+    fromInteger 0 = Zero
+    fromInteger _ = One
+
+```
+
+```haskell
+
 {-# LANGUAGE TypeSynonymInstances, FlexibleInstances #-}
 import Data.Char
 
