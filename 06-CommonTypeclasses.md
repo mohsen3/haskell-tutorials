@@ -35,6 +35,14 @@ instance Monoid GPA where
   mempty = GPA 0.0 1
 ```
 
+### Monoid laws
+
+```haskell
+mempty `mappend` x = x
+x `mappend` mempty = x
+(x `mappend` y) `mappend` z = x `mappend` (y `mappend` z)
+```
+
 ### The `<>` operator
 
 ```haskell
@@ -111,6 +119,15 @@ Nothing
 λ> fmap (fmap succ) [Just 3, Nothing, Just 4]
 [Just 4,Nothing,Just 5]
 
+```
+
+### Functor laws
+`fmap` does not change the structure of the container,
+just the elements.
+
+```haskell
+fmap id = id
+fmap (g . h) = (fmap g) . (fmap h)
 ```
 
 ## `Applicative`
