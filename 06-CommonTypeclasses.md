@@ -73,6 +73,46 @@ instance Num n => Monoid (Product n) where
 
 ## `Functor`
 
+Functor is the typeclass of things that can apply a function to the inner component(s).
+
+```haskell
+class Functor f where
+  {-# MINIMAL fmap #-}
+  fmap :: (a -> b) -> f a -> f b
+ 
+  (<$) :: a        -> f b -> f a
+  (<$) = fmap . const
+```
+
+For lists,
+`fmap` is the same as `map`.
+
+```haskell
+λ> fmap succ [3, 4, 2]
+[4, 5, 3]
+```
+
+Here is the instance declaration for `Maybe`:
+
+```haskell
+instance Functor Maybe where
+  fmap :: (a -> b) -> Maybe a -> Maybe b
+  fmap _ Nothing  = Nothing
+  fmap g (Just a) = Just (g a)
+```
+
+```haskell
+λ> fmap succ (Just 3)
+Just 4
+
+λ> fmap succ Nothing
+Nothing
+
+λ> fmap (fmap succ) [Just 3, Nothing, Just 4]
+[Just 4,Nothing,Just 5]
+
+```
+
 ## `Applicative`
 
 ## `Foldable`
