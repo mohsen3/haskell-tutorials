@@ -130,6 +130,18 @@ fmap id = id
 fmap (g . h) = (fmap g) . (fmap h)
 ```
 
+### The `<$>` operator
+
+```haskell
+infixl 4 <$>
+(<$>) = fmap
+```
+
+```haskell
+λ> succ <$> Just 3
+Just 4
+```
+
 ## `Applicative`
 
 ## `Foldable`
