@@ -164,6 +164,26 @@ instance Ord a => Ord (Tree a) where
     (l1 == l2 && x == y && r1 <= r2)
 ```
 
+## :ledger: Homework
+Implement an instance of `Show` for `Tree a` that generates an indented version of tree,
+e.g.,
+`foldr insert empty [8, 4, 1, 5, 3]`
+results in
+
+```
+3
+ 1
+  Nil
+  Nil
+ 5
+  4
+   Nil
+   Nil
+  8
+   Nil
+   Nil
+```
+
 ### Further reading
 
 * Automatic differentiation in Haskell
