@@ -184,6 +184,19 @@ results in
    Nil
 ```
 
+## :ledger: Homework
+Consider the following definition for `fromList` on the `Tree a` datatype:
+
+```haskell
+fromList :: Ord a => [a] -> Tree a
+fromList = foldl (flip insert) empty
+```
+
+Write a `toList :: Tree t -> [t]` function so that `toList . fromList == id`,
+i.e.,
+`toList` generates the exact same list as the original list the tree is made from.
+  - Hint: You need a preorder traversal of the tree.
+
 ### Further reading
 
 * Automatic differentiation in Haskell
