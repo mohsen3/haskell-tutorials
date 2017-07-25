@@ -146,3 +146,18 @@ Just 4
 
 ## `Foldable`
 
+## :ledger: Homework
+`Semigroup` is a typeclass that has a `<>` operator (similar to `Monoid` `<>` operator) but no `mempty`.
+Semigroup is the class of things that can be concatinated,
+but do not have any empty instance.
+The class is placed in `Data.Semigroup` module that is available from the `semigroup` package.
+The `semigroup` package also provides `Data.List.NonEmpty` that is a non-empty list of items with the following definition:
+
+```haskell
+data NonEmpty a = a :| [a]
+```
+`NonEmpty` is a `Semigroup`.
+The package also provides `newtype` wrappers for `Min a` and `Max a`.
+Explain why `Max Int` is a monoid,
+while `Max Integer` is a semigroup.
+
