@@ -156,6 +156,8 @@ The `semigroup` package also provides `Data.List.NonEmpty` that is a non-empty l
 ```haskell
 data NonEmpty a = a :| [a]
 ```
+No, `:|` is not a smiley.
+It's the constructor of the `NonEmpty` type.
 `NonEmpty` is a `Semigroup`.
 The package also provides `newtype` wrappers for `Min a` and `Max a`.
 Explain why `Max Int` is a monoid,
