@@ -159,7 +159,7 @@ data NonEmpty a = a :| [a]
 No, `:|` is not a smiley.
 It's the constructor of the `NonEmpty` type.
 `NonEmpty` is a `Semigroup`.
-The package also provides `newtype` wrappers for `Min a` and `Max a`.
+The package also provides `newtype` wrappers for `Min a` and `Max a` (similar to `Sum a` and `Product a`).
 Explain why `Max Int` is a monoid,
 while `Max Integer` is a semigroup.
 
