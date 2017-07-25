@@ -149,7 +149,7 @@ Just 4
 ## :ledger: Homework
 `Semigroup` is a typeclass that has a `<>` operator (similar to `Monoid` `<>` operator) but no `mempty`.
 Semigroup is the class of things that can be concatinated,
-but do not have any empty instance.
+but do not have any null instance.
 The class is placed in `Data.Semigroup` module that is available from the `semigroup` package.
 The `semigroup` package also provides `Data.List.NonEmpty` that is a non-empty list of items with the following definition:
 
