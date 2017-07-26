@@ -142,9 +142,45 @@ infixl 4 <$>
 Just 4
 ```
 
+## `Foldable`
+
+```haskell
+class Foldable t where
+    {-# MINIMAL foldMap | foldr #-}
+
+    -- | Map each element of the structure to a monoid,
+    -- and combine the results.
+    foldMap :: Monoid m => (a -> m) -> t a -> m
+    -- This INLINE allows more list functions to fuse. See Trac #9848.
+    foldMap f = foldr (mappend . f) mempty
+
+    -- | Right-associative fold of a structure.
+    foldr :: (a -> b -> b) -> b -> t a -> b
+    
+    -- several other functions including
+    -- fold, foldl,
+    -- toList, null, length, elem, 
+    -- maximum, minimum, sum, product
+```
+
+Module `Data.Foldable` also adds the following functions (and a few more) to any `Foldable`:
+
+```haskell
+concat :: Foldable t => t [a] -> [a]
+concatMap :: Foldable t => (a -> [b]) -> t a -> [b]
+and :: Foldable t => t Bool -> Bool
+or :: Foldable t => t Bool -> Bool
+any :: Foldable t => (a -> Bool) -> t a -> Bool
+all :: Foldable t => (a -> Bool) -> t a -> Bool
+maximumBy :: Foldable t => (a -> a -> Ordering) -> t a -> a
+minimumBy :: Foldable t => (a -> a -> Ordering) -> t a -> a
+notElem :: (Foldable t, Eq a) => a -> t a -> Bool
+find :: Foldable t => (a -> Bool) -> t a -> Maybe a
+```
+
+
 ## `Applicative`
 
-## `Foldable`
 
 ## :ledger: Homework
 `Semigroup` is a typeclass that has a `<>` operator (similar to `Monoid` `<>` operator) but no `mempty`.
