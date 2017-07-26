@@ -200,6 +200,8 @@ data Tree a = Nil | Node (Tree a) a (Tree a) deriving (Show, Eq, Ord, Functor, F
 
 ## `Applicative`
 
+## :ledger: Homework
+Write a `Monoid` instance for `Tree a`.
 
 ## :ledger: Homework
 `Semigroup` is a typeclass that has a `<>` operator (similar to `Monoid` `<>` operator) but no `mempty`.
