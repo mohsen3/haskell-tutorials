@@ -179,6 +179,25 @@ find :: Foldable t => (a -> Bool) -> t a -> Maybe a
 ```
 
 
+We can define a `Foldable` instance for `Tree` as follows:
+
+```haskell
+data Tree a = Nil | Node (Tree a) a (Tree a) deriving (Show, Eq, Ord)
+
+instance Foldable Tree where
+  foldr _ z Nil = z
+  foldr f z (Node l d r) = foldr f (f d (foldr f z l)) r
+```
+
+Interestingly,
+GHC can automatically derive `Foldable` and `Functor` instances for us
+using the `DeriveFoldable` and `DeriveFunctor` extensions:
+```haskell
+{-# LANGUAGE DeriveFoldable #-}
+{-# LANGUAGE DeriveFunctor #-}
+data Tree a = Nil | Node (Tree a) a (Tree a) deriving (Show, Eq, Ord, Functor, Foldable)
+```
+
 ## `Applicative`
 
 
