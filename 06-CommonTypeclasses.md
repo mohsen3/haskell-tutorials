@@ -207,7 +207,7 @@ Write a `Monoid` instance for `Tree a`.
 The main advantage of the *binary search tree* (BST) data structure is that operations like `elem` and `find` can be done in time `O(log n)` (on average).
 
   1. Explain why the above definition of `Foldable` instance for `Tree` results in an `O(n)` algorithm for `elem` and `find`.
-  2. Write a custom `Foldable` instance for `Tree` and a custom `find` function that work in `O(log n)` rather than `O(n)`.
+  2. Write a custom custom `treeFind` and `treeElem` functions that work in `O(log n)` rather than `O(n)`.
 
 ## :ledger: Homework
 Update the definition of the `Tree` datatype to be:
