@@ -204,6 +204,26 @@ data Tree a = Nil | Node (Tree a) a (Tree a) deriving (Show, Eq, Ord, Functor, F
 Write a `Monoid` instance for `Tree a`.
 
 ## :ledger: Homework
+The main advantage of the *binary search tree* (BST) data structure is that operations like `elem` and `find` can be done in time `O(log n)` (on average).
+
+  1. Explain why the above definition of `Foldable` instance for `Tree` results in an `O(n)` algorithm for `elem` and `find`.
+  2. Write a custom `Foldable` instance for `Tree` and a custom `find` function that work in `O(log n)` rather than `O(n)`.
+
+## :ledger: Homework
+Update the definition of the `Tree` datatype to be:
+```haskell
+data Tree a = Nil | 
+              Node { left     :: Tree a
+                   , nodeData :: a
+                   , right    :: Tree a
+                   , size     :: Int
+                   } deriving (Show, Eq, Ord)
+```
+The new `size` field to keeps the size of the sub-tree.
+Update `insert` and `length` so that they work with the new `size` field.
+Note that `length` works in `O(1)` now.
+
+## :ledger: Homework
 `Semigroup` is a typeclass that has a `<>` operator (similar to `Monoid` `<>` operator) but no `mempty`.
 Semigroup is the class of things that can be concatinated,
 but do not have any null instance.
