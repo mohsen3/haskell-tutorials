@@ -248,6 +248,26 @@ instance Applicative ((->) a) -- Defined in ‘GHC.Base’
 instance Monoid a => Applicative ((,) a) -- Defined in ‘GHC.Base’
 ```
 
+```haskell
+instance Applicative Maybe where  
+    pure = Just  
+    Nothing <*> _ = Nothing  
+    (Just f) <*> something = fmap f something  
+```
+
+```haskell
+instance Applicative [] where  
+    pure x = [x]  
+    fs <*> xs = [f x | f <- fs, x <- xs]  
+```
+
+```haskell
+instance Applicative ZipList where  
+        pure x = ZipList (repeat x)  
+        ZipList fs <*> ZipList xs = ZipList (zipWith (\f x -> f x) fs xs)  
+```
+
+
 
 # `Alternative`
 
