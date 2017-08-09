@@ -200,6 +200,55 @@ data Tree a = Nil | Node (Tree a) a (Tree a) deriving (Show, Eq, Ord, Functor, F
 
 ## `Applicative`
 
+Applicatives allow you to put a function into a *contest* and apply it onto an object which resides inside the same context.
+
+```haskell
+class Functor f => Applicative f where
+    {-# MINIMAL pure, ((<*>) | liftA2) #-}
+
+    -- | Lift a value.
+    pure :: a -> f a
+
+    -- | Sequential application.
+    (<*>) :: f (a -> b) -> f a -> f b
+    (<*>) = liftA2 id
+
+    -- | Lift a binary function to actions.
+    liftA2 :: (a -> b -> c) -> f a -> f b -> f c
+    liftA2 f x = (<*>) (fmap f x)
+
+    -- | Sequence actions, discarding the value of the first argument.
+    (*>) :: f a -> f b -> f b
+    a1 *> a2 = (id <$ a1) <*> a2
+    
+    -- | Sequence actions, discarding the value of the second argument.
+    (<*) :: f a -> f b -> f a
+    (<*) = liftA2 const
+```
+
+Helper functions:
+
+```haskell
+-- | Lift a function to actions.
+liftA :: Applicative f => (a -> b) -> f a -> f b
+liftA f a = pure f <*> a
+
+-- | Lift a ternary function to actions.
+liftA3 :: Applicative f => (a -> b -> c -> d) -> f a -> f b -> f c -> f d
+liftA3 f a b c = liftA2 f a b <*> c
+```
+
+Applicative instances:
+
+```haskell
+instance Applicative (Either e) -- Defined in ‘Data.Either’
+instance Applicative [] -- Defined in ‘GHC.Base’
+instance Applicative Maybe -- Defined in ‘GHC.Base’
+instance Applicative ((->) a) -- Defined in ‘GHC.Base’
+instance Monoid a => Applicative ((,) a) -- Defined in ‘GHC.Base’
+```
+
+
 ## :ledger: Homework
 Write a `Monoid` instance for `Tree a`.
 
