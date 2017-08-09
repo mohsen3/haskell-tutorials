@@ -249,6 +249,30 @@ instance Monoid a => Applicative ((,) a) -- Defined in ‘GHC.Base’
 ```
 
 
+# `Alternative`
+
+```haskell
+class Applicative f => Alternative f where
+    {-# MINIMAL empty, (<|>) #-}
+    -- | The identity of '<|>'
+    empty :: f a
+
+    -- | An associative binary operation
+    (<|>) :: f a -> f a -> f a
+
+    -- | One or more.
+    some :: f a -> f [a]
+
+    -- | Zero or more.
+    many :: f a -> f [a]
+```
+
+```haskell
+instance Alternative [] -- Defined in ‘GHC.Base’
+instance Alternative Maybe -- Defined in ‘GHC.Base’
+```
+
+
 ## :ledger: Homework
 Write a `Monoid` instance for `Tree a`.
 
