@@ -1,4 +1,6 @@
 ```haskell
+module SimpleParser where
+
 import Control.Applicative (Alternative(..), some, (<*), (*>))
 import Data.Bifunctor (first)
 import Data.Char (isDigit, isLetter)
@@ -58,8 +60,21 @@ sep s x = (:) <$> x <*> many (s *> x)
 
 commaSep :: Parser a -> Parser [a]
 commaSep = sep (char ',')
+```
 
-data Func = Func String [String] deriving (Show)
-funcParser = string "def " *> (Func <$> name <*> parens (commaSep name))
+
+```haskell
+type VarName = String
+type FuncName = String
+data Exp = Num Int | Var VarName | Sum [Exp] | Mult [Exp] deriving Show
+data Command = FunctionDef FuncName [VarName] Exp | FunctionCall FuncName [Exp] deriving Show
+
+atom = Var  <$> name <|> Num  <$> number <|> parens expression
+term = Mult <$> sep (string "*") atom
+expression = Sum <$> sep (string "+") term
+
+command :: Parser Command
+command =  string "def " *> (pure FunctionDef <*> name <*> parens (commaSep name) <* string "=" <*> expression)
+       <|> (FunctionCall <$> name <*> parens (commaSep expression))
 
 ```
