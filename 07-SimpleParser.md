@@ -131,6 +131,7 @@ newline = string "\r\n" <|> string "\n"
 ```
 
 # A parser for `nano`
+
 ````haskell
 
 type VarName = String
@@ -160,5 +161,5 @@ command =
 
 program :: Parser [Command]
 program = sepBy newline command <* many newline
-
 ```
+
