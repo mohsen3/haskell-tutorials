@@ -132,8 +132,8 @@ newline = string "\r\n" <|> string "\n"
 
 # A parser for `nano`
 
-````haskell
 
+````haskell
 type VarName = String
 type FuncName = String
 data Exp = Num Int
@@ -161,15 +161,16 @@ command =
 
 program :: Parser [Command]
 program = sepBy newline command <* many newline
+
 ```
 
-### :ledger: Homework
+## :ledger: Homework
 Extend the _nano_ parser so that it is able to parse binary and hex numbers. Binary numbers start with a `0b` (e.g., `0b1101010`) and hex numbers start with a `0x` (e.g., `0x1f3ab`). Hex numbers only use lowercase [`a`..`f`] and `x` letters.
 
-### :ledger: Homework
+## :ledger: Homework
 The parser currently does not handle whitespaces. E.g., ` let  y = f ( 3, 4 ) ` seems to be a legit statement. Modify the parser so that it handles whitespaces before and after keywords, variable names, function names, operators and numbers. Think about an approach that is both clean and has minimal changes to the source code.
 
-### :ledger: Homework (Advanced)
+## :ledger: Homework (Advanced)
 Update the parser so that it reports better error messages including column and line number.
 
 
