@@ -100,7 +100,15 @@ instance Alternative Parser where
 ```
 
 # Helper functions
-Provide building blocks for any more complicated parser.
+
+Recall that `Alternative` the following default definitions for `many` and `some`:
+
+```haskell
+many v = some v <|> pure []
+some v = (:) <$> v <*> many v
+```
+
+The following helper functions provide building blocks for more complicated parsers.
 
 ```haskell
 char :: Char -> Parser Char
