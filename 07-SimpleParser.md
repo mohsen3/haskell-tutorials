@@ -132,10 +132,11 @@ newline = string "\r\n" <|> string "\n"
 
 # A parser for `nano`
 
-
-````haskell
+## Required types
+``` haskell
 type VarName = String
 type FuncName = String
+
 data Exp = Num Int
          | Var VarName
          | Sum Exp Exp
@@ -145,7 +146,11 @@ data Exp = Num Int
 data Command = Def FuncName [VarName] Exp
              | Let VarName Exp
              | Print Exp deriving Show
+```
 
+
+## The parser itself
+```haskell
 atom = Call <$> name <*> parens (commaSep expression)
     <|> Var <$> name
     <|> Num <$> number
@@ -161,8 +166,8 @@ command =
 
 program :: Parser [Command]
 program = sepBy newline command <* many newline
-
 ```
+
 
 ## :ledger: Homework
 Extend the _nano_ parser so that it is able to parse binary and hex numbers. Binary numbers start with a `0b` (e.g., `0b1101010`) and hex numbers start with a `0x` (e.g., `0x1f3ab`). Hex numbers only use lowercase [`a`..`f`] and `x` letters.
