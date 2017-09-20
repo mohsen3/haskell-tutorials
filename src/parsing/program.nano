@@ -1,0 +1,5 @@
+def f(x,y)=x+2*y
+let y=f(3,4)
+let z=y+3*f(y,3)
+print z
+
