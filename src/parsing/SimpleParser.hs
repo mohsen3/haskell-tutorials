@@ -93,3 +93,7 @@ command =
 program :: Parser [Command]
 program = sepBy newline command <* many newline
 
+------------------------------------------------------
+main = do
+  source <- readFile "program.nano"
+  print $ runParser program source
