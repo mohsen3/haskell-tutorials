@@ -1,0 +1,34 @@
+name:                nano-lang
+version:             0.1.0.0
+homepage:            https://github.com/mohsen3/haskell-tutorials/tree/master/src/nano-lang
+license:             MIT
+author:              Mohsen Mollanoori
+maintainer:          example@example.com
+copyright:           2017 Mohsen Mollanoori
+category:            Programming
+build-type:          Simple
+extra-source-files:  README.md
+cabal-version:       >=1.10
+
+executable nano-lang
+  hs-source-dirs:      src
+  main-is:             Main.hs
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N -Wall
+  build-depends:       base
+  default-language:    Haskell2010
+  other-modules:       ParserLib.SimpleParser,
+                       Nano.Parser,
+                       Nano.Types
+
+test-suite nano-lang-test
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test
+  main-is:             Spec.hs
+  build-depends:       base
+                     , nano-lang
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
+  default-language:    Haskell2010
+
+source-repository head
+  type:     git
+  location: https://github.com/mohsen3/haskell-tutorials/tree/master/src/nano-lang

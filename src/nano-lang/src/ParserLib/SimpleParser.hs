@@ -1,10 +1,11 @@
-module SimpleParser where
+module ParserLib.SimpleParser where
 
-import Control.Applicative (Alternative(..), some, (<*), (*>))
+import Control.Applicative (Alternative(..), some)
 import Data.Bifunctor (first)
 import Data.Char (isDigit, isLetter)
 
-newtype Parser a = Parser{ parse :: String -> Either String (a, String) }
+-- We only use pattern matching to extract the function, so we don't need to use record syntax
+newtype Parser a = Parser (String -> Either String (a, String))
 
 runParser :: Parser a -> String -> Either String a
 runParser (Parser parse) input = 
@@ -55,45 +56,10 @@ parens :: Parser a -> Parser a
 parens x = char '(' *> x <* char ')'
 
 sepBy :: Parser s -> Parser a -> Parser [a]
-sepBy s x = (:) <$> x <*> many (s *> x)
+sepBy s x = (:) <$> x <*> many (s *> x) <|> pure []
 
 commaSep :: Parser a -> Parser [a]
 commaSep = sepBy (char ',')
 
 newline :: Parser ()
 newline = string "\r\n" <|> string "\n"
-
---------------------------------------------------------
-type VarName = String
-type FuncName = String
-data Exp = Num Int
-         | Var VarName
-         | Sum Exp Exp
-         | Mult Exp Exp
-         | Call FuncName [Exp] deriving Show
-
-data Command = Def FuncName [VarName] Exp
-             | Let VarName Exp
-             | Print Exp deriving Show
-
-atom, term, expression :: Parser Exp
-atom = Call <$> name <*> parens (commaSep expression)
-    <|> Var <$> name
-    <|> Num <$> number
-    <|> parens expression
-term = Mult <$> atom <* string "*" <*> term <|> atom
-expression = Sum <$> term <* string "+" <*> expression <|> term
-
-command :: Parser Command
-command =
-       pure Def <* string "def " <*> name <*> parens (commaSep name) <* string "=" <*> expression
-   <|> pure Let <* string "let " <*> name <* string "=" <*> expression
-   <|> pure Print <* string "print " <*> expression
-
-program :: Parser [Command]
-program = sepBy newline command <* many newline
-
-------------------------------------------------------
-main = do
-  source <- readFile "program.nano"
-  print $ runParser program source
