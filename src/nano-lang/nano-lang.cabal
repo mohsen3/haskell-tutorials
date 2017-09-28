@@ -13,10 +13,11 @@ cabal-version:       >=1.10
 executable nano-lang
   hs-source-dirs:      src
   main-is:             Main.hs
-  ghc-options:         -threaded -rtsopts -with-rtsopts=-N -Wall
+  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
   build-depends:       base
   default-language:    Haskell2010
   other-modules:       ParserLib.SimpleParser,
+                       Nano.Evaluator,
                        Nano.Parser,
                        Nano.Types
 
