@@ -86,3 +86,14 @@ Note that if we have `return` and `join`, we can write bind as
 ```haskell
 ma >>= f = join (fmap f ma)
 ```
+
+## `IO` is a `Monad`
+
+One of the amazing things about Monads is that they can simulate side effects.
+
+```haskell
+main :: IO ()
+main = putStr "What's your name? " >> getLine >>= \name -> putStrLn ("hello " ++ name)
+```
+
+
