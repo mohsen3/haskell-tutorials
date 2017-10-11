@@ -96,4 +96,18 @@ main :: IO ()
 main = putStr "What's your name? " >> getLine >>= \name -> putStrLn ("hello " ++ name)
 ```
 
+## The `do` notation
+
+Haskell has a handy syntactic sugar for Monads
+
+```haskell
+main = do
+   putStr "What's your name? "
+   name <- getLine
+   putStrLn ("hello " ++ name)
+```
+
+It makes Haskell look like imparative programming, but it's not.
+It's just a syntax sugar.
+
 
