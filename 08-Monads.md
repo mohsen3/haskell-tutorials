@@ -38,5 +38,12 @@ We can define
 fmap f xs = xs >>= return . f
 ```
 
-For applicatives `(>>) = (*>)` and ...
+For applicatives `pure` is the same as `return` and `<*>` can be written as
+
+```haskell
+ap m1 m2 = m1 >>= \x1 -> (m2 >>= \x2 -> return (x1 x2))
+```
+
+Additionally, `(*>)` is the same as `(>>)`.
+
 
