@@ -25,11 +25,12 @@ m >> k = m >>= \_ -> k
 
 Let `bind = flip (>>=)`.
 We can see the similarity and differences between the three.
+In the following `con` denotes the `Functor`, `Applicative` or `Monad` context.
 
 ```haskell
-fmap :: Functor f     =>   (a -> b) -> f a -> f b
-<*>  :: Applicative f => f (a -> b) -> f a -> f b
-bind :: Monad f       => (a -> f b) -> f a -> f b
+fmap :: Functor con     =>     (a -> b) -> con a -> con b
+<*>  :: Applicative con => con (a -> b) -> con a -> con b
+bind :: Monad con       => (a -> con b) -> con a -> con b
 ```
 Monads are more powerful than Applicatives and Applicatives are more powerful than Functors.
 We can define 
