@@ -21,7 +21,7 @@ class Applicative m => Monad m where
 m >> k = m >>= \_ -> k
 ```
 
-## `Monad` is more powerful than `Applicative` and `Functors`
+## `Monad` is more powerful than `Applicative` and `Functor`
 
 Let `bind = flip (>>=)`.
 We can see the similarity and differences between the three.
@@ -41,9 +41,48 @@ fmap f xs = xs >>= return . f
 For applicatives `pure` is the same as `return` and `<*>` can be written as
 
 ```haskell
-ap m1 m2 = m1 >>= \x1 -> (m2 >>= \x2 -> return (x1 x2))
+m1 <*> m2 = m1 >>= \x1 -> (m2 >>= \x2 -> return (x1 x2))
 ```
 
 Additionally, `(*>)` is the same as `(>>)`.
 
 
+## Where does this power come from?
+
+Given a list, say we want to duplicate each item in the list.
+E.g., given `[1,2,3]` we want to produce `[1,1,2,2,3,3]`.
+We define function
+
+```haskell
+dup x = [x, x]
+```
+
+Then we can use `fmap` to duplicate all the items in the given list:
+
+```haskell
+dupList xs = fmap dup xs
+```
+
+But the result of `dupList [1,2,3]` is `[[1,1],[2,2],[3,3]]`.
+In fact, `Functor`s cannot do any better.
+Applicatives are the same.
+Once we introduce a new layer of structure (here the list structure),
+we cannot remove it using the mechanism that `Functor` and `Applicative` suggest.
+But `Monad` can do that.
+
+```haskell
+λ> [1,2,3] >>= dup
+[1,1,2,2,3,3]
+```
+
+`Monad` is sometimes defined in terms of `return` and `join` where
+
+```haskell
+join :: Monad m => m (m a) -> ma
+join x = x >>= id
+```
+Note that if we have `return` and `join`, we can write bind as
+
+```haskell
+ma >>= f = join (fmap f ma)
+```
