@@ -21,7 +21,7 @@ class Applicative m => Monad m where
 m >> k = m >>= \_ -> k
 ```
 
-## `Monad`s are more powerful than `Applicative`s and `Functors`s
+## `Monad` is more powerful than `Applicative` and `Functors`
 
 Let `bind = flip (>>=)`.
 We can see the similarity and differences between the three.
