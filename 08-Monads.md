@@ -10,15 +10,33 @@ That's a technically correct definition, but it's not so helpful in practice.
 
 ```haskell
 class Applicative m => Monad m where
-  (>>=) :: m a -> (a -> m b) -> m b -- bind operator
   return :: a -> m a
+  (>>=) :: m a -> (a -> m b) -> m b -- bind operator
 ```
 
-`Monad` class also defines `>>` operator with the default definition of:
+`Monad` class also defines `>>` (sometimes called the sequence operator) with the default definition of:
 
 ```haskell
 (>>) :: m a -> m b -> m b
 m >> k = m >>= \_ -> k
 ```
 
+# `Monad`s are `Applicative`s and `Functors`s
+
+Let `bind = flip (>>=)`.
+We can see the similarity and differences between the three.
+
+```haskell
+fmap :: Functor f     =>   (a -> b) -> f a -> f b
+<*>  :: Applicative f => f (a -> b) -> f a -> f b
+bind :: Monad f       => (a -> f b) -> f a -> f b
+```
+Monads are more powerful than Applicatives and Applicatives are more powerful than Functors.
+We can define 
+
+```haskell
+fmap f xs = xs >>= return . f
+```
+
+For applicatives `(>>) = (*>)` and ...
 
