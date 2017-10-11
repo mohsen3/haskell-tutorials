@@ -1,4 +1,4 @@
-# What is `Monad`?
+## What is `Monad`?
 
 > A monad is a monoid in the category of endofunctors
 
@@ -6,7 +6,7 @@ No, seriously! It's not a joke!
 That's a technically correct definition, but it's not so helpful in practice.
 
 
-# So, what is `Monad`?
+## So, what is `Monad`?
 
 ```haskell
 class Applicative m => Monad m where
@@ -21,7 +21,7 @@ class Applicative m => Monad m where
 m >> k = m >>= \_ -> k
 ```
 
-# `Monad`s are `Applicative`s and `Functors`s
+## `Monad`s are more powerful than `Applicative`s and `Functors`s
 
 Let `bind = flip (>>=)`.
 We can see the similarity and differences between the three.
