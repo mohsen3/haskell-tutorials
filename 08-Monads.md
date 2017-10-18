@@ -111,4 +111,42 @@ main = do
 It makes Haskell look like imparative programming, but it's not.
 It's just a syntax sugar.
 
+## An example Monad
 
+```haskell
+
+data Logged a = Logged [String] a
+
+instance Functor Logged where
+  fmap f (Logged msgs x) = Logged msgs (f x)
+
+instance Applicative Logged where
+  pure x = Logged [] x
+  Logged msgs1 f <*> Logged msgs2 x = Logged (msgs1 ++ msgs2) (f x)
+
+instance Monad Logged where
+  return = pure
+  Logged msgs x >>= f = let Logged msgs2 x2 = f x in Logged (msgs ++ msgs2) x2
+
+logMsg :: String -> Logged ()
+logMsg msg = Logged [msg] ()
+
+get1 :: Logged Int
+get1 = do
+  logMsg "returning 1"
+  return 1
+
+runLogged :: Logged a -> ([String], a)
+runLogged (Logged msg x) = (msg, x)
+
+main = do
+  let (msgs, res) = runLogged $ do
+    one <- get1
+    logMsg $ "got " ++ show one
+    logMsg "Finished"
+    return one
+
+  print msgs
+  print res
+
+```
