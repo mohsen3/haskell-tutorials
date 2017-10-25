@@ -150,3 +150,10 @@ main = do
   print res
 
 ```
+
+
+## Further Reading
+
+- [The State Monad: A Tutorial for the Confused?](http://brandon.si/code/the-state-monad-a-tutorial-for-the-confused/)
+- [Haskell: Generating random numbers](http://www.markhneedham.com/blog/2012/05/08/haskell-generating-random-numbers/)
+- [Monad Examples](https://github.com/phischu/monad-examples)
