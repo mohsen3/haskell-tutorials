@@ -38,6 +38,19 @@ instance Alternative Parser where
       (_, Right x) -> Right x
       (Left msg1, Left msg2) -> Left $ concat ["Alternative failed: ", msg1, " <|> ", msg2]
 
+instance Monad Parser where
+  return = pure
+  -- Parser a >>= (a -> Parser b) -> Parser b
+  (Parser p1) >>= f = Parser g
+    where
+      -- g :: String -> Either String (b, String)
+      g s = do
+        (a, r1) <- p1 s
+        let (Parser p2) = f a
+        p2 r1
+
+  fail msg = Parser $ \_ -> Left msg
+
 char :: Char -> Parser Char
 char ch = charMatch (==ch)
 
