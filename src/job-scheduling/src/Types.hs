@@ -2,7 +2,6 @@
 {-# LANGUAGE RecordWildCards #-}
 module Types where
 
-import qualified Data.List.NonEmpty as NE
 import Data.List.NonEmpty (NonEmpty)
 import System.Random
 
@@ -41,6 +40,8 @@ data FarmState = FarmState { currentTime      :: Time
                            , machineSchedules :: [MachineSchedule]
                            } deriving Show
 
+type Scheduler = Time -> Job -> NonEmpty MachineSchedule -> MachineId
+
 findCandidateMachines :: Time -> Job -> [MachineSchedule] -> [MachineSchedule]
 findCandidateMachines currentTime job = filter (\ms -> job `fits` (remainingResources currentTime ms))
 
@@ -56,12 +57,9 @@ remainingResources currentTime MachineSchedule{..} = foldl subtractJob machine j
       | startTime + jobDuration <= currentTime = machine -- job finished
       | otherwise = Machine (machineCores - jobCores) (machineGPUs - jobGPUs) (machineRAM - jobRAM)
 
-schedule :: Job -> NonEmpty MachineSchedule -> MachineId
-schedule job machines = machineId $ NE.head machines
-
-addJobToShedule :: Time -> [MachineSchedule] -> Job -> MachineId -> [MachineSchedule]
-addJobToShedule currentTime machineSchedules job mId = map updateMachine machineSchedules
-    where
-        updateMachine :: MachineSchedule -> MachineSchedule
-        updateMachine machine | machineId machine == mId = machine{jobs=(currentTime, job):jobs machine}
-                              | otherwise = machine
+addJobToSchedule :: Time -> [MachineSchedule] -> Job -> MachineId -> [MachineSchedule]
+addJobToSchedule currentTime machineSchedules job mId = map updateMachine machineSchedules
+  where
+    updateMachine :: MachineSchedule -> MachineSchedule
+    updateMachine machine | machineId machine == mId = machine{jobs=(currentTime, job):jobs machine}
+                          | otherwise = machine

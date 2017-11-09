@@ -2,6 +2,8 @@
 module Main where
 
 import Types
+import Scheduler
+import Simulator
 
 import Control.Applicative
 import qualified Data.Heap as H
@@ -10,29 +12,16 @@ import System.Random
 import Text.Show.Pretty (pPrint)
 
 
-simulate :: [Job] -> H.MinHeap Word -> FarmState -> FarmState
-simulate [] finishTimes farmState = -- all jobs already scheduled
-    case H.view finishTimes of
-        Nothing -> farmState -- simulation finished
-        Just (t, newFinishTimes) -> simulate [] newFinishTimes farmState{ currentTime = t }
-simulate (job:jobs) finishTimes (FarmState currentTime machineSchedules) =
-    case NE.nonEmpty $ findCandidateMachines currentTime job machineSchedules of
-      Nothing -> case H.view finishTimes of -- no machine available, wait for the first job to finish
-        Nothing -> error $ "Job too large? " ++ show job
-        Just (t, newFinishTimes) -> simulate (job:jobs) newFinishTimes (FarmState t machineSchedules)
-      Just candidateMachines -> -- use the scheduler
-        let machineId = schedule job candidateMachines
-        in  simulate jobs
-                     (H.insert (currentTime + duration job) finishTimes)
-                     (FarmState currentTime (addJobToShedule currentTime machineSchedules job machineId))
-
-
 main :: IO ()
 main = do
   g <- newStdGen
   let
-    jobs = take 20 $ (randomRs (Job 1 1 1 1, Job 8 2 1000 10)  g :: [Job])
-    farmState = FarmState 0 [MachineSchedule (Machine 32 4 10000) 111 [], MachineSchedule (Machine 32 4 10000) 222 []]
-    endState = simulate jobs (H.singleton 0) farmState
+    jobs = take 2000 $ (randomRs (Job 1 0 1 1, Job 8 1 1000 100)  g :: [Job])
+    farmState = FarmState 0 [MachineSchedule (Machine 32 2 10000) i [] | i <- [1..100]]
+--     endState = simulate firstFitScheduler jobs (H.singleton 0) farmState
+    schedulers = [firstFitScheduler,
+                  bestRAMFit, bestGPUFit, bestCoresFit, bestAllFit,
+                  worstRAMFit, worstGPUFit, worstCoresFit, worstAllFit]
+    results = map (\s -> currentTime $ simulate s jobs (H.singleton 0) farmState) schedulers
 
-  pPrint endState
+  pPrint results
