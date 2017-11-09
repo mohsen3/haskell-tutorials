@@ -13,7 +13,7 @@ data Job =
          } deriving (Show, Eq, Bounded)
 
 instance Random Job where
-  random g = randomR (minBound, maxBound) g
+  random = randomR (minBound, maxBound)
   randomR (Job minCores minGPUs minRAM minDuration, Job maxCores maxGPUs maxRAM maxDuration) g =
     (Job{..}, g4)
     where
@@ -43,7 +43,7 @@ data FarmState = FarmState { currentTime      :: Time
 type Scheduler = Time -> Job -> NonEmpty MachineSchedule -> MachineId
 
 findCandidateMachines :: Time -> Job -> [MachineSchedule] -> [MachineSchedule]
-findCandidateMachines currentTime job = filter (\ms -> job `fits` (remainingResources currentTime ms))
+findCandidateMachines currentTime job = filter (\ms -> job `fits` remainingResources currentTime ms)
 
 fits :: Job -> Machine -> Bool
 fits (Job jobCores jobGPUs jobRAM _) (Machine machineCores machineGPUs machineRAM) =
@@ -53,7 +53,7 @@ remainingResources :: Time -> MachineSchedule -> Machine
 remainingResources currentTime MachineSchedule{..} = foldl subtractJob machine jobs
   where
     subtractJob :: Machine -> (Time, Job) -> Machine
-    subtractJob machine@((Machine machineCores machineGPUs machineRAM)) (startTime, (Job jobCores jobGPUs jobRAM jobDuration))
+    subtractJob machine@(Machine machineCores machineGPUs machineRAM) (startTime, Job jobCores jobGPUs jobRAM jobDuration)
       | startTime + jobDuration <= currentTime = machine -- job finished
       | otherwise = Machine (machineCores - jobCores) (machineGPUs - jobGPUs) (machineRAM - jobRAM)
 
