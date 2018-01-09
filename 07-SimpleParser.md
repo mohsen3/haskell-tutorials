@@ -184,6 +184,10 @@ Extend the _nano_ parser so that it is able to parse binary and hex numbers. Bin
 The parser currently does not handle whitespaces. E.g., ` let  y = f ( 3, 4 ) ` seems to be a legit statement. Modify the parser so that it handles whitespaces before and after keywords, variable names, function names, operators and numbers. Think about an approach that is both clean and has minimal changes to the source code.
 
 ## :ledger: Homework (Advanced)
+Write a function `eval :: [Command] -> [Int]` that runs a list of parsed commands and returns a list of printed values.
+  - **Tip:** Use [the stub provided for this assignment](../master/src/nano-lang/src/Nano/Evaluator.hs) and fill in the `undefined`s.
+
+## :ledger: Homework (Advanced)
 Update the parser so that it reports better error messages including column and line number.
 
 
