@@ -29,7 +29,7 @@ worstGPUFit = genericSingleFieldScheduler gpus maximumBy
 worstCoresFit = genericSingleFieldScheduler cores maximumBy
 
 productAggregator :: Machine -> Word
-productAggregator (Machine c g r) = c * g * r
+productAggregator (ResourceBundle c g r) = c * g * r
 
 bestAllFit, worstAllFit :: Scheduler
 bestAllFit = genericSingleFieldScheduler productAggregator minimumBy
