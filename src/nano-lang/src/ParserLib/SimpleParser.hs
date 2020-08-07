@@ -8,7 +8,7 @@ import Data.Char (isDigit, isLetter)
 newtype Parser a = Parser (String -> Either String (a, String))
 
 runParser :: Parser a -> String -> Either String a
-runParser (Parser parse) input = 
+runParser (Parser parse) input =
   case parse input of
     Left msg -> Left msg
     Right (x, "") -> Right x
@@ -17,11 +17,11 @@ runParser (Parser parse) input =
 charMatch :: (Char -> Bool) -> Parser Char
 charMatch f = Parser charParser
   where charParser (c:r) | f c = Right (c, r)
-                         | otherwise = Left "Predicated does not match"
+                         | otherwise = Left $ "Predicate does not match at: " ++ head (lines (c:r))
         charParser "" = Left "Empty input"
 
 instance Functor Parser where
-  fmap f (Parser parse) = Parser $ fmap (first f) . parse 
+  fmap f (Parser parse) = Parser $ fmap (first f) . parse
 
 instance Applicative Parser where
   pure x = Parser $ \s -> Right (x, s)
