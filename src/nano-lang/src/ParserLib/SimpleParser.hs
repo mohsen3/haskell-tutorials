@@ -49,8 +49,6 @@ instance Monad Parser where
         let (Parser p2) = f a
         p2 r1
 
-  fail msg = Parser $ \_ -> Left msg
-
 char :: Char -> Parser Char
 char ch = charMatch (==ch)
 
