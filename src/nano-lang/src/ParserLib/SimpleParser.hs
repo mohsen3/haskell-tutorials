@@ -38,6 +38,9 @@ instance Alternative Parser where
       (_, Right x) -> Right x
       (Left msg1, Left msg2) -> Left $ concat ["Alternative failed: ", msg1, " <|> ", msg2]
 
+-- We don't really need the monad instance in our project since
+-- the applicative instance is powerful enough for our purpose.
+-- i.e., you can comment this out and the project compiles!
 instance Monad Parser where
   return = pure
   -- Parser a >>= (a -> Parser b) -> Parser b
