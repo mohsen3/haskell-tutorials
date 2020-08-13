@@ -3,13 +3,10 @@ layout: true
 class: center, middle, inverse
 ---
 ### Introduction to Haskell
-# Data Types
+# Algebraic Data Types
 ### Mohsen Mollanori
 ---
 layout: false
-# Algebraic data types
-
----
 
 ## The simple form
 ```haskell

@@ -309,7 +309,7 @@ rep :: Int -> (Int -> Int) -> Int -> Int
 rep n f x = ...
 ```
 
-E.g., `rep 3 f 1` is `f (f (f 1)))`.
+E.g., `rep 3 f 1` is `f (f (f 1))`.
 
 
 ---
