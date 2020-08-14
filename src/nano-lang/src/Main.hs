@@ -15,5 +15,5 @@ main = do
   print parsed
   print $ case parsed of
             Right cmds -> show $ eval cmds
-            Left err -> err
+            Left err -> "Err -> " ++ err
 

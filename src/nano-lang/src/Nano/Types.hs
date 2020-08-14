@@ -2,6 +2,7 @@ module Nano.Types where
 
 type VarName = String
 type FuncName = String
+
 data Exp = Num Int
          | Var VarName
          | Sum Exp Exp
