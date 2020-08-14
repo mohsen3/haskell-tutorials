@@ -275,8 +275,6 @@ class Foldable t where
 
     -- | Map each element of the structure to a monoid,
     -- and combine the results.
-    foldMap :: Monoid m => (a -> m) -> t a -> m
-    -- This INLINE allows more list functions to fuse. See Trac #9848.
     foldMap f = foldr (mappend . f) mempty
 
     -- | Right-associative fold of a structure.
@@ -308,3 +306,30 @@ find :: Foldable t => (a -> Bool) -> t a -> Maybe a
 
 ---
 
+## Applicative
+
+
+```haskell
+class Functor f => Applicative (f :: * -> *) where
+  pure :: a -> f a
+  (<*>) :: f (a -> b) -> f a -> f b
+  liftA2 :: (a -> b -> c) -> f a -> f b -> f c
+  (*>) :: f a -> f b -> f b
+  (<*) :: f a -> f b -> f a
+  {-# MINIMAL pure, ((<*>) | liftA2) #-}
+  	-- Defined in ‘GHC.Base’
+```
+
+---
+
+## Alternative
+
+```haskell
+class Applicative f => Alternative (f :: * -> *) where
+  empty :: f a
+  (<|>) :: f a -> f a -> f a
+  some :: f a -> f [a]
+  many :: f a -> f [a]
+  {-# MINIMAL empty, (<|>) #-}
+  	-- Defined in ‘GHC.Base’
+```
